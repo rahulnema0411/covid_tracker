@@ -23,3 +23,18 @@ flutter:
 
   uses-material-design: true
 
+  fonts:
+    - family: NunitoSans
+      fonts:
+        - asset: fonts/NunitoSans-Regular.ttf
+        - asset: fonts/NunitoSans-Italic.ttf
+        - asset: fonts/NunitoSans-Bold.ttf
+        - asset: fonts/NunitoSans-Light.ttf
+        - asset: fonts/NunitoSans-ExtraLight.ttf
+        - asset: fonts/NunitoSans-ExtraLightItalic.ttf
+        - asset: fonts/NunitoSans-ExtraBold.ttf
+        - asset: fonts/NunitoSans-ExtraBoldItalic.ttf
+        - asset: fonts/NunitoSans-SemiBold.ttf
+        - asset: fonts/NunitoSans-SemiBoldItalic.ttf
+        - asset: fonts/NunitoSans-Black.ttf
+        - asset: fonts/NunitoSans-BlackItalic.ttf

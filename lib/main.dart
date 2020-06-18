@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'screens/home_screen.dart';
+import 'constants.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+    ),
+  );
   runApp(MyApp());
 }
 
@@ -9,24 +18,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Home(),
+      theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: backGroundColor_dark,
+          appBarTheme: AppBarTheme(
+            color: backGroundColor_dark,
+            elevation: 0.0,
+          )),
+      home: HomeScreen(),
     );
-  }
-}
-
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
