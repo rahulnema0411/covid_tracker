@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covidtracker/constants.dart';
 import 'package:covidtracker/widgets/data_card.dart';
+import 'package:covidtracker/widgets/chart_card.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               newDeaths: '20',
             ),
           ),
+          ChartCard(),
         ],
       ),
     );

@@ -24,6 +24,9 @@ class DataCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: cardColor_dark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
       elevation: 10.0,
       child: Column(
         children: <Widget>[
@@ -56,14 +59,14 @@ class DataCard extends StatelessWidget {
                       style: cardData_textStyle,
                     ),
                     SizedBox(
-                      height: 5.0,
+                      height: 6.0,
                     ),
                     Text(
                       'Total Recovered  :  ',
                       style: cardData_textStyle,
                     ),
                     SizedBox(
-                      height: 5.0,
+                      height: 6.0,
                     ),
                     Text(
                       'Total Deaths        :  ',
@@ -73,7 +76,7 @@ class DataCard extends StatelessWidget {
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
                       totalConfirmed,
