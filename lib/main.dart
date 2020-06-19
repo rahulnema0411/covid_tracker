@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'screens/home_screen.dart';
+
 import 'constants.dart';
+import 'screens/active_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
             color: backGroundColor_dark,
             elevation: 0.0,
           )),
-      home: HomeScreen(),
+      home: ActiveScreen(),
     );
   }
 }
