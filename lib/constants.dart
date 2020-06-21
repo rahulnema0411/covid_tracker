@@ -30,3 +30,7 @@ const TextStyle cardsubHeading_textStyle = TextStyle(
 const TextStyle cardData_textStyle = TextStyle(
   fontFamily: 'NunitoSans',
 );
+
+const TextStyle kstateCard_textStyle = TextStyle(
+  fontFamily: 'NunitoSans',
+);

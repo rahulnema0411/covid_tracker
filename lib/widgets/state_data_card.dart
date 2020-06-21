@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:covidtracker/constants.dart';
 import 'package:flutter/rendering.dart';
 
-class DataCard extends StatelessWidget {
+class StateDataCard extends StatelessWidget {
   final String totalConfirmed;
   final String totalRecovered;
   final String totalDeaths;
@@ -12,14 +12,20 @@ class DataCard extends StatelessWidget {
   final String newRecovered;
   final String newDeaths;
 
-  DataCard({
-    this.totalConfirmed,
-    this.totalRecovered,
-    this.totalDeaths,
-    this.newConfirmed,
-    this.newRecovered,
-    this.newDeaths,
-  });
+  final String recoveryRate;
+  final String activeRate;
+  final String deathRate;
+
+  StateDataCard(
+      {this.totalConfirmed,
+      this.totalRecovered,
+      this.totalDeaths,
+      this.newConfirmed,
+      this.newRecovered,
+      this.newDeaths,
+      this.recoveryRate,
+      this.activeRate,
+      this.deathRate});
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +154,70 @@ class DataCard extends StatelessWidget {
                     ],
                   ), //deaths
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          'Recovery Rate',
+                          style: cardData_textStyle.copyWith(
+                            color: accentColor_green,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        Text(
+                          recoveryRate,
+                          style: cardData_textStyle.copyWith(
+                            color: accentColor_green,
+                            fontSize: 12.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          'Active Rate',
+                          style: cardData_textStyle.copyWith(
+                            color: accentColor_red,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        Text(
+                          activeRate,
+                          style: cardData_textStyle.copyWith(
+                            color: accentColor_red,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          'Death Rate',
+                          style: cardData_textStyle.copyWith(
+                            color: textColor_dark,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        Text(
+                          deathRate,
+                          style: cardData_textStyle.copyWith(
+                            color: textColor_dark,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],
