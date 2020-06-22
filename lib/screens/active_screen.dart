@@ -1,5 +1,7 @@
 import 'package:covidtracker/constants.dart';
+import 'package:covidtracker/models/table_data.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
+import 'package:covidtracker/widgets/table_view.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
@@ -14,7 +16,28 @@ class _ActiveScreenState extends State<ActiveScreen> {
   List<Widget> screens = [
     HomeScreen(),
     HomeScreen(),
-    HomeScreen(),
+    TableView(
+      children: [
+        TableData(
+          location: 'India',
+          confirmed: 345217,
+          recovered: 153697,
+          deceased: 10482,
+        ),
+        TableData(
+          location: 'US',
+          confirmed: 545812,
+          recovered: 256492,
+          deceased: 20657,
+        ),
+        TableData(
+          location: 'Spain',
+          confirmed: 435972,
+          recovered: 435972,
+          deceased: 78462,
+        ),
+      ],
+    ),
     Center(
       child: Text('OK'),
     )

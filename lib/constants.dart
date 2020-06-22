@@ -34,3 +34,13 @@ const TextStyle cardData_textStyle = TextStyle(
 const TextStyle kstateCard_textStyle = TextStyle(
   fontFamily: 'NunitoSans',
 );
+
+//Table View Styling
+const TextStyle kTextViewHeading = TextStyle(
+  fontSize: 14.0,
+  fontWeight: FontWeight.bold,
+);
+
+const TextStyle kTextViewData = TextStyle(
+  fontSize: 12.0,
+);

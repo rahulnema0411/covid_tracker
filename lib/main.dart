@@ -20,11 +20,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: backGroundColor_dark,
-          appBarTheme: AppBarTheme(
-            color: backGroundColor_dark,
-            elevation: 0.0,
-          )),
+        scaffoldBackgroundColor: backGroundColor_dark,
+        appBarTheme: AppBarTheme(
+          color: backGroundColor_dark,
+          elevation: 0.0,
+        ),
+      ),
       home: ActiveScreen(),
     );
   }
