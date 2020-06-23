@@ -9,8 +9,8 @@ class BottomNavBar extends StatefulWidget {
   BottomNavBar(
       {this.selectedItem,
       this.onTap,
-      this.selectedTabColor = backGroundColor_dark,
-      this.backgroundColor = cardColor_dark}) {
+      this.selectedTabColor = Colors.black,
+      this.backgroundColor = Colors.black}) {
     selectedColor = selectedTabColor;
   }
 
@@ -30,9 +30,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        color: widget.backgroundColor,
       ),
-      height: 60.0,
+      height: 54.0,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -88,22 +87,26 @@ class BottomNavBarItem extends StatelessWidget {
           onTap(index);
         },
         child: Material(
-          elevation: 3.5,
+          //elevation: 3.5,
           child: Container(
-              color: isSelected ? selectedColor : Colors.transparent,
+              color: Colors.black54,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Icon(
                     icon,
                     semanticLabel: label,
+                    color: isSelected ? accentColor_red : Colors.white,
                   ),
                   SizedBox(
                     height: 2.0,
                   ),
                   Text(
                     label,
-                    style: TextStyle(fontSize: isSelected ? 11.0 : 0.0),
+                    style: TextStyle(
+                        fontSize: isSelected ? 11.0 : 0.0,
+                        color: isSelected ? accentColor_red : Colors.white,
+                        fontFamily: 'NunitoSans'),
                   ),
                 ],
               )),

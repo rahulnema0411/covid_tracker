@@ -3,7 +3,6 @@ import 'package:covidtracker/models/table_data.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
 import 'package:covidtracker/widgets/table_view.dart';
 import 'package:flutter/material.dart';
-
 import 'home_screen.dart';
 
 class ActiveScreen extends StatefulWidget {
