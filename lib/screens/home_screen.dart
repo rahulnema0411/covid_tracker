@@ -1,3 +1,4 @@
+import 'package:covidtracker/models/card_data_type.dart';
 import 'package:covidtracker/widgets/chart_card.dart';
 import 'package:covidtracker/widgets/data_card.dart';
 import 'package:covidtracker/widgets/state_data_card.dart';
@@ -11,6 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String state;
+  String country;
+
+  CardDataType cardDataState;
+  CardDataType cardDataCountry;
+  CardDataType cardDataGlobal;
+
   @override
   void initState() {
     super.initState();
@@ -22,11 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
     LocationService locationService = LocationService();
     await locationService.getLocation();
     await locationService.getAddress();
+    this.state = locationService.city;
+    this.country = locationService.country;
   }
 
   Future<void> getStats() async {
     Statistics stats = Statistics();
-    await stats.getStatistics();
+    cardDataCountry = await stats.getCountryStatistics(country);
+    cardDataGlobal = await stats.getGlobalStatistics();
   }
 
   @override
@@ -35,31 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: <Widget>[
           StateDataCard(
-            totalConfirmed: '10,395',
-            totalRecovered: '7904',
-            totalDeaths: '546',
-            newConfirmed: '1500',
-            newRecovered: '150',
-            newDeaths: '20',
-            activeRate: '23.48.',
-            recoveryRate: '72.27',
-            deathRate: '3.14',
+            cardDataState: cardDataState,
           ),
           DataCard(
-            totalConfirmed: '10,395',
-            totalRecovered: '7904',
-            totalDeaths: '546',
-            newConfirmed: '1500',
-            newRecovered: '150',
-            newDeaths: '20',
+            cardData: cardDataCountry,
           ),
           DataCard(
-            totalConfirmed: '10,395',
-            totalRecovered: '7904',
-            totalDeaths: '546',
-            newConfirmed: '1500',
-            newRecovered: '150',
-            newDeaths: '20',
+            cardData: cardDataGlobal,
           ),
           ChartCard(),
         ],

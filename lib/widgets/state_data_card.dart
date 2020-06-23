@@ -1,31 +1,13 @@
+import 'package:covidtracker/models/card_data_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covidtracker/constants.dart';
 import 'package:flutter/rendering.dart';
 
 class StateDataCard extends StatelessWidget {
-  final String totalConfirmed;
-  final String totalRecovered;
-  final String totalDeaths;
+  final CardDataType cardDataState;
 
-  final String newConfirmed;
-  final String newRecovered;
-  final String newDeaths;
-
-  final String recoveryRate;
-  final String activeRate;
-  final String deathRate;
-
-  StateDataCard(
-      {this.totalConfirmed,
-      this.totalRecovered,
-      this.totalDeaths,
-      this.newConfirmed,
-      this.newRecovered,
-      this.newDeaths,
-      this.recoveryRate,
-      this.activeRate,
-      this.deathRate});
+  StateDataCard({this.cardDataState});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +25,7 @@ class StateDataCard extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               alignment: Alignment.topLeft,
               child: Text(
-                'Madhya Pradesh',
+                cardDataState.location,
                 style: cardHeading_textStyle,
               ),
             ), //heading
@@ -51,7 +33,7 @@ class StateDataCard extends StatelessWidget {
               alignment: Alignment.topLeft,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                'Active Cases : 320922',
+                'Active Cases : ${cardDataState.activeCases}',
                 style: cardsubHeading_textStyle,
               ),
             ), //subheading
@@ -88,21 +70,21 @@ class StateDataCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        totalConfirmed,
+                        cardDataState.confirmed,
                         style: cardData_textStyle,
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Text(
-                        totalRecovered,
+                        cardDataState.recovered,
                         style: cardData_textStyle,
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Text(
-                        totalDeaths,
+                        cardDataState.deceased,
                         style: cardData_textStyle,
                       ),
                     ],
@@ -117,7 +99,7 @@ class StateDataCard extends StatelessWidget {
                             color: accentColor_red,
                           ),
                           Text(
-                            newConfirmed,
+                            cardDataState.newConfirmed,
                             style: cardData_textStyle.copyWith(
                               fontSize: 10.0,
                               color: accentColor_red,
@@ -132,7 +114,7 @@ class StateDataCard extends StatelessWidget {
                             color: accentColor_green,
                           ),
                           Text(
-                            newRecovered,
+                            cardDataState.newRecovered,
                             style: cardData_textStyle.copyWith(
                               fontSize: 10.0,
                               color: accentColor_green,
@@ -144,7 +126,7 @@ class StateDataCard extends StatelessWidget {
                         children: <Widget>[
                           Icon(Icons.arrow_drop_down),
                           Text(
-                            newDeaths,
+                            cardDataState.newDeaths,
                             style: cardData_textStyle.copyWith(
                               fontSize: 10.0,
                             ),
@@ -172,7 +154,7 @@ class StateDataCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          recoveryRate,
+                          cardDataState.recoveryRate,
                           style: cardData_textStyle.copyWith(
                             color: accentColor_green,
                             fontSize: 12.0,
@@ -190,7 +172,7 @@ class StateDataCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          activeRate,
+                          cardDataState.activeRate,
                           style: cardData_textStyle.copyWith(
                             color: accentColor_red,
                             fontSize: 12.0,
@@ -208,7 +190,7 @@ class StateDataCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          deathRate,
+                          cardDataState.deathRate,
                           style: cardData_textStyle.copyWith(
                             color: textColor_dark,
                             fontSize: 12.0,

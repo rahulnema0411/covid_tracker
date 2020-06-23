@@ -1,19 +1,19 @@
 class CardDataType {
   String location;
 
-  int confirmed;
-  int recovered;
-  int deceased;
+  String confirmed;
+  String recovered;
+  String deceased;
 
-  int newConfirmed;
-  int newRecovered;
-  int newDeaths;
+  String newConfirmed;
+  String newRecovered;
+  String newDeaths;
 
-  int activeRate;
-  int recoveryRate;
-  int deathRate;
+  String activeRate;
+  String recoveryRate;
+  String deathRate;
 
-  int activeCases;
+  String activeCases;
 
   CardDataType(
       {this.location,

@@ -1,24 +1,14 @@
+import 'package:covidtracker/models/card_data_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covidtracker/constants.dart';
 import 'package:flutter/rendering.dart';
 
 class DataCard extends StatelessWidget {
-  final String totalConfirmed;
-  final String totalRecovered;
-  final String totalDeaths;
-
-  final String newConfirmed;
-  final String newRecovered;
-  final String newDeaths;
+  final CardDataType cardData;
 
   DataCard({
-    this.totalConfirmed,
-    this.totalRecovered,
-    this.totalDeaths,
-    this.newConfirmed,
-    this.newRecovered,
-    this.newDeaths,
+    this.cardData,
   });
 
   @override
@@ -45,7 +35,7 @@ class DataCard extends StatelessWidget {
               alignment: Alignment.topLeft,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                'Active Cases : 320922',
+                'Active Cases : ${cardData.activeCases}}',
                 style: cardsubHeading_textStyle,
               ),
             ), //subheading
@@ -82,21 +72,21 @@ class DataCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        totalConfirmed,
+                        cardData.confirmed,
                         style: cardData_textStyle,
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Text(
-                        totalRecovered,
+                        cardData.recovered,
                         style: cardData_textStyle,
                       ),
                       SizedBox(
                         height: 5.0,
                       ),
                       Text(
-                        totalDeaths,
+                        cardData.deceased,
                         style: cardData_textStyle,
                       ),
                     ],
@@ -111,7 +101,7 @@ class DataCard extends StatelessWidget {
                             color: accentColor_red,
                           ),
                           Text(
-                            newConfirmed,
+                            cardData.newConfirmed,
                             style: cardData_textStyle.copyWith(
                               fontSize: 10.0,
                               color: accentColor_red,
@@ -126,7 +116,7 @@ class DataCard extends StatelessWidget {
                             color: accentColor_green,
                           ),
                           Text(
-                            newRecovered,
+                            cardData.newRecovered,
                             style: cardData_textStyle.copyWith(
                               fontSize: 10.0,
                               color: accentColor_green,
@@ -138,7 +128,7 @@ class DataCard extends StatelessWidget {
                         children: <Widget>[
                           Icon(Icons.arrow_drop_down),
                           Text(
-                            newDeaths,
+                            cardData.newDeaths,
                             style: cardData_textStyle.copyWith(
                               fontSize: 10.0,
                             ),

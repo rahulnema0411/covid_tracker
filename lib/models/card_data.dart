@@ -18,7 +18,7 @@ class CardData {
     _setDataToCardDataCountry(responseBody, ofCountry);
   }
 
-  CardData(Response response) {
+  CardData.global(Response response) {
     String responseBody = response.body;
     _setDataToCardDataGlobal(responseBody);
   }
@@ -44,17 +44,17 @@ class CardData {
     int activeCases = confirmed - recovered - deceased;
 
     _cardDataGlobal = CardDataType(
-      confirmed: confirmed,
-      recovered: recovered,
-      deceased: deceased,
-      deathRate: deathRate,
-      recoveryRate: recoveryRate,
-      newRecovered: newRecovered,
-      newDeaths: newDeceased,
-      newConfirmed: newConfirmed,
+      confirmed: confirmed as String,
+      recovered: recovered as String,
+      deceased: deceased as String,
+      deathRate: deathRate as String,
+      recoveryRate: recoveryRate as String,
+      newRecovered: newRecovered as String,
+      newDeaths: newDeceased as String,
+      newConfirmed: newConfirmed as String,
       location: location,
-      activeCases: activeCases,
-      activeRate: activeRate,
+      activeCases: activeCases as String,
+      activeRate: activeRate as String,
     );
   }
 
@@ -78,17 +78,17 @@ class CardData {
     int activeCases = confirmed - recovered - deceased;
 
     _cardDataGlobal = CardDataType(
-      confirmed: confirmed,
-      recovered: recovered,
-      deceased: deceased,
-      deathRate: deathRate,
-      recoveryRate: recoveryRate,
-      newRecovered: newRecovered,
-      newDeaths: newDeceased,
-      newConfirmed: newConfirmed,
+      confirmed: confirmed as String,
+      recovered: recovered as String,
+      deceased: deceased as String,
+      deathRate: deathRate as String,
+      recoveryRate: recoveryRate as String,
+      newRecovered: newRecovered as String,
+      newDeaths: newDeceased as String,
+      newConfirmed: newConfirmed as String,
       location: location,
-      activeCases: activeCases,
-      activeRate: activeRate,
+      activeCases: activeCases as String,
+      activeRate: activeRate as String,
     );
   }
 

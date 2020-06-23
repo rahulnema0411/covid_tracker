@@ -1,12 +1,15 @@
 import 'dart:convert';
-import 'file:///F:/AndroidStudioProjects/foundOnGit/covid_tracker/lib/models/card_data_type.dart';
-
+import 'package:covidtracker/models/card_data_type.dart';
 import 'package:http/http.dart' as http;
 
+import 'card_data.dart';
+
 class Statistics {
+  CardData _cardData;
+
   Statistics();
 
-  void getStatistics() async {
+  Future<void> getStatistics() async {
     http.Response response =
         await http.get('https://api.covid19api.com/summary');
     //print(response.body);
@@ -17,11 +20,19 @@ class Statistics {
     print(decodedData['Countries'][100]['Country']);
   }
 
-  void getGlobalStatistics() async {
+  Future<CardDataType> getCountryStatistics(String country) async {
     http.Response response =
         await http.get('https://api.covid19api.com/summary');
 
-    String data = response.body;
-    var decodedData = jsonDecode(data);
+    CardData cardData = CardData.country(response, country);
+    return cardData.cardDataCountry;
+  }
+
+  Future<CardDataType> getGlobalStatistics() async {
+    http.Response response =
+        await http.get('https://api.covid19api.com/summary');
+
+    CardData cardData = CardData.global(response);
+    return cardData.cardDataGlobal;
   }
 }
