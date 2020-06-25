@@ -25,13 +25,9 @@ class LocationService {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     _latitude = position.latitude;
     _longitude = position.longitude;
-    print('latitude$_latitude');
-    print('longitude$_longitude');
-    print(position);
   }
 
-  Future<void> getAddress() async {
-    print('getting Address');
+  Future<List> getAddress() async {
     List<Placemark> placemark =
         await Geolocator().placemarkFromCoordinates(_latitude, _longitude);
 
@@ -39,6 +35,6 @@ class LocationService {
     _state = placemark[0].administrativeArea;
     _country = placemark[0].country;
 
-    print('$_city $_state $_country');
+    return placemark;
   }
 }

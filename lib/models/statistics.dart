@@ -1,38 +1,41 @@
-import 'dart:convert';
 import 'package:covidtracker/models/card_data_type.dart';
 import 'package:http/http.dart' as http;
-
 import 'card_data.dart';
 
 class Statistics {
-  CardData _cardData;
+  http.Response _responseGlobal;
+  http.Response _responseNational;
+  http.Response _responseStateLevel;
+  http.Response _responseStateLevel1;
 
   Statistics();
 
   Future<void> getStatistics() async {
-    http.Response response =
-        await http.get('https://api.covid19api.com/summary');
-    //print(response.body);
+    _responseGlobal =
+        await http.get('https://corona.lmao.ninja/v2/all?yesterday');
 
-    String data = response.body;
-    var decodedData = jsonDecode(data);
+    _responseNational =
+        await http.get('https://corona.lmao.ninja/v2/countries?yesterday&sort');
 
-    print(decodedData['Countries'][100]['Country']);
+    _responseStateLevel = await http
+        .get('https://covid-19india-api.herokuapp.com/v2.0/state_data');
+    _responseStateLevel1 =
+        await http.get('https://api.covid19india.org/data.json');
   }
 
-  Future<CardDataType> getCountryStatistics(String country) async {
-    http.Response response =
-        await http.get('https://api.covid19api.com/summary');
+  CardDataType getStateLevelStatistics(String country, String state) {
+    CardData cardData =
+        CardData.state(_responseStateLevel, _responseStateLevel1, state);
+    return cardData.cardDataLocal;
+  }
 
-    CardData cardData = CardData.country(response, country);
+  CardDataType getCountryStatistics(String country) {
+    CardData cardData = CardData.country(_responseNational, country);
     return cardData.cardDataCountry;
   }
 
-  Future<CardDataType> getGlobalStatistics() async {
-    http.Response response =
-        await http.get('https://api.covid19api.com/summary');
-
-    CardData cardData = CardData.global(response);
+  CardDataType getGlobalStatistics() {
+    CardData cardData = CardData.global(_responseGlobal);
     return cardData.cardDataGlobal;
   }
 }

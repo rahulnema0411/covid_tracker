@@ -27,7 +27,7 @@ class DataCard extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               alignment: Alignment.topLeft,
               child: Text(
-                'Madhya Pradesh',
+                cardData.location,
                 style: cardHeading_textStyle,
               ),
             ), //heading
@@ -35,7 +35,7 @@ class DataCard extends StatelessWidget {
               alignment: Alignment.topLeft,
               padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Text(
-                'Active Cases : ${cardData.activeCases}}',
+                'Active Cases : ${cardData.activeCases}',
                 style: cardsubHeading_textStyle,
               ),
             ), //subheading

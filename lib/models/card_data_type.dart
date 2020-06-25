@@ -27,4 +27,30 @@ class CardDataType {
       this.recoveryRate,
       this.deathRate,
       this.activeCases});
+
+  void printAllData() {
+    print(this.location +
+        ' ' +
+        this.newConfirmed +
+        ' ' +
+        this.newRecovered +
+        ' ' +
+        this.newDeaths +
+        ' ' +
+        this.confirmed +
+        ' ' +
+        this.recovered +
+        ' ' +
+        this.deceased +
+        ' ' +
+        this.activeCases +
+        ' ' +
+        this.activeRate +
+        ' ' +
+        this.deathRate +
+        ' ' +
+        this.recoveryRate +
+        ' ' +
+        this.newConfirmed);
+  }
 }
