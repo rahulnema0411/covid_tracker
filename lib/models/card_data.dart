@@ -31,7 +31,7 @@ class CardData {
 
     String location = 'Madhya Pradesh';
 
-    //TODO : make the data readable...
+    //TODO : make the data readable
 
     String confirmed = decodedData1['statewise'][8]['confirmed'];
     String recovered = decodedData1['statewise'][8]['recovered'];

@@ -7,6 +7,7 @@ class Statistics {
   http.Response _responseNational;
   http.Response _responseStateLevel;
   http.Response _responseStateLevel1;
+  http.Response _responseDistrictLevel;
 
   Statistics();
 
@@ -21,6 +22,10 @@ class Statistics {
         .get('https://covid-19india-api.herokuapp.com/v2.0/state_data');
     _responseStateLevel1 =
         await http.get('https://api.covid19india.org/data.json');
+
+    _responseDistrictLevel =
+        await http.get('https://api.covid19india.org/state_district_wise.json');
+    //print(_responseDistrictLevel.body);
   }
 
   CardDataType getStateLevelStatistics(String country, String state) {
@@ -38,4 +43,14 @@ class Statistics {
     CardData cardData = CardData.global(_responseGlobal);
     return cardData.cardDataGlobal;
   }
+
+  http.Response get responseGlobal => _responseGlobal;
+
+  http.Response get responseNational => _responseNational;
+
+  http.Response get responseStateLevel => _responseStateLevel;
+
+  http.Response get responseStateLevel1 => _responseStateLevel1;
+
+  http.Response get responseDistrictLevel => _responseDistrictLevel;
 }

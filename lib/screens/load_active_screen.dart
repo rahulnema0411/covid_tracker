@@ -24,18 +24,12 @@ class _LoadActiveScreenState extends State<LoadActiveScreen> {
     List<Placemark> placemark = await locationService.getAddress();
     await stats.getStatistics();
 
-    CardDataType cardDataGlobal = stats.getGlobalStatistics();
-    CardDataType cardDataCountry =
-        stats.getCountryStatistics(placemark[0].country);
-    CardDataType cardDataLocal = stats.getStateLevelStatistics(
-        placemark[0].country, placemark[0].administrativeArea);
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ActiveScreen(
-          cardDataGlobal: cardDataGlobal,
-          cardDataCountry: cardDataCountry,
-          cardDataState: cardDataLocal,
+          placemark: placemark,
+          stats: stats,
         ),
       ),
     );

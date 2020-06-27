@@ -1,9 +1,7 @@
 import 'package:covidtracker/screens/load_active_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'constants.dart';
-import 'screens/active_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
