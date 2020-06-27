@@ -44,3 +44,19 @@ const TextStyle kTextViewHeading = TextStyle(
 const TextStyle kTextViewData = TextStyle(
   fontSize: 12.0,
 );
+
+class Essentials {
+  static String toReadableInt(String number) {
+    if (number.length <= 3) {
+      return number;
+    } else {
+      String readableNum =
+          '${number.substring(number.length - 3, number.length)}';
+      for (int i = number.length - 4; i >= 0; i = i - 2) {
+        readableNum = ',$readableNum';
+        readableNum = '${number.substring(i, i + 2)}$readableNum';
+      }
+      return readableNum;
+    }
+  }
+}

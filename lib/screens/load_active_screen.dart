@@ -1,9 +1,10 @@
-import 'package:covidtracker/models/card_data_type.dart';
 import 'package:covidtracker/models/location_service.dart';
 import 'package:covidtracker/models/statistics.dart';
-import 'package:covidtracker/screens/active_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+
+import 'active_screen.dart';
+import 'loading_shimmer_screen.dart';
 
 //TODO : Implement Shimmer
 class LoadActiveScreen extends StatefulWidget {
@@ -38,8 +39,10 @@ class _LoadActiveScreenState extends State<LoadActiveScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Loading the goddamn data'),
+    return Scaffold(
+      body: SafeArea(
+        child: LoadingShimmerScreen(),
+      ),
     );
   }
 }

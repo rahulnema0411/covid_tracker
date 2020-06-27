@@ -10,7 +10,7 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: padding ?? EdgeInsets.all(12.0),
       child: Material(
         color: cardColor_dark,
         borderRadius:
