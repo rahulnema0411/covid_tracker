@@ -1,5 +1,4 @@
 import 'package:covidtracker/constants.dart';
-import 'package:covidtracker/models/card_data_type.dart';
 import 'package:covidtracker/models/statistics.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';

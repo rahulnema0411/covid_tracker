@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _cardDataGlobal = widget.stats.getGlobalStatistics();
     _cardDataCountry =
         widget.stats.getCountryStatistics(widget.placemark[0].country);

@@ -5,6 +5,7 @@ import 'package:covidtracker/screens/active_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+//TODO : Implement Shimmer
 class LoadActiveScreen extends StatefulWidget {
   @override
   _LoadActiveScreenState createState() => _LoadActiveScreenState();
