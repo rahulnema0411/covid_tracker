@@ -1,15 +1,9 @@
 import 'package:covidtracker/constants.dart';
-import 'package:covidtracker/models/statistics.dart';
+import 'package:covidtracker/screens/home_screen_switch.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
 
 class ActiveScreen extends StatefulWidget {
-  final List placemark;
-  final Statistics stats;
-
-  ActiveScreen({@required this.placemark, this.stats});
-
   @override
   _ActiveScreenState createState() => _ActiveScreenState();
 }
@@ -24,10 +18,7 @@ class _ActiveScreenState extends State<ActiveScreen> {
     super.initState();
 
     screens = [
-      HomeScreen(
-        stats: widget.stats,
-        placemark: widget.placemark,
-      ),
+      HomeScreenSwitch(),
       Center(
         child: Text('OK'),
       ),
