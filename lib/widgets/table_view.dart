@@ -102,10 +102,12 @@ class TableView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      padding: EdgeInsets.all(8.0),
-      child: ListView(
-        children: _getWidgetsList(),
+    return SingleChildScrollView(
+      child: CustomCard(
+        padding: EdgeInsets.all(8.0),
+        child: ListView(
+          children: _getWidgetsList(),
+        ),
       ),
     );
   }

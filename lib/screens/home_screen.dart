@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:covidtracker/models/card_data_type.dart';
 import 'package:covidtracker/models/statistics.dart';
+import 'package:covidtracker/models/table_data.dart';
 import 'package:covidtracker/widgets/data_card.dart';
 import 'package:covidtracker/widgets/state_data_card.dart';
 import 'package:covidtracker/widgets/table_view.dart';
@@ -24,26 +26,26 @@ class _HomeScreenState extends State<HomeScreen> {
   CardDataType _cardDataCountry;
   CardDataType _cardDataState;
 
+  List<TableData> _countryStats;
+  List<TableData> _stateStats;
+  List<TableData> _districtStats;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _cardDataGlobal = widget.stats.getGlobalStatistics();
-    _cardDataCountry =
-        widget.stats.getCountryStatistics(widget.placemark[0].country);
-    _cardDataState = widget.stats.getStateLevelStatistics(
-        widget.placemark[0].country, widget.placemark[0].administrativeArea);
+    _countryStats = widget.stats.getTableDataListCountry();
+    _stateStats = widget.stats.getTableDataListState();
+    _districtStats = widget.stats.getTableDataListDistrict();
+    print('district');
+    print(_districtStats);
 
     _widgetList = [
-      _glanceView(_cardDataState, _cardDataCountry, _cardDataGlobal),
-      _detailedView(),
-      Center(
-        child: Text('Hello1'),
-      ),
-      Center(
-        child: Text('Hello2'),
-      ),
+      _glanceView(),
+      _detailedView(_districtStats),
+      _detailedView(_stateStats),
+      _detailedView(_countryStats),
     ];
   }
 
@@ -54,12 +56,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _glanceView(CardDataType cardDataState, CardDataType cardDataCountry,
-      CardDataType cardDataGlobal) {
+  Widget _glanceView() {
+    _cardDataGlobal = widget.stats.getGlobalStatistics();
+    _cardDataCountry =
+        widget.stats.getCountryStatistics(widget.placemark[0].country);
+    _cardDataState = widget.stats.getStateLevelStatistics(
+        widget.placemark[0].country, widget.placemark[0].administrativeArea);
+
     return Column(
       children: <Widget>[
         StateDataCard(
-          cardDataState: cardDataState,
+          cardDataState: _cardDataState,
           onPressed: () {
             print('Tap Detected');
             setState(() {
@@ -68,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         DataCard(
-          cardData: cardDataCountry,
+          cardData: _cardDataCountry,
           onPressed: () {
             print('Tap Detected');
             setState(() {
@@ -77,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         DataCard(
-          cardData: cardDataGlobal,
+          cardData: _cardDataGlobal,
           onPressed: () {
             print('Tap Detected');
             setState(() {
@@ -89,18 +96,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _detailedView() {
-    return Column(
-      children: <Widget>[
-        FlatButton(
-          child: Icon(Icons.arrow_back),
-          onPressed: () {
-            setState(() {
-              _selectedWidget = 0;
-            });
-          },
-        )
-      ],
+  Widget _detailedView(List<TableData> tableData) {
+    List<TableData> dd = [];
+    dd.add(tableData[0]);
+
+    return TableView(
+      children: dd,
     );
   }
 }

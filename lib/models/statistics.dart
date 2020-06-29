@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:covidtracker/models/card_data_type.dart';
+import 'package:covidtracker/models/table_data.dart';
 import 'package:http/http.dart' as http;
 import 'card_data.dart';
 
@@ -6,7 +8,7 @@ class Statistics {
   http.Response _responseGlobal;
   http.Response _responseNational;
   http.Response _responseStateLevel;
-  http.Response _responseStateLevel1;
+  http.Response _responseStateLevel1; //get table data from this one only
   http.Response _responseDistrictLevel;
 
   Statistics();
@@ -53,4 +55,68 @@ class Statistics {
   http.Response get responseStateLevel1 => _responseStateLevel1;
 
   http.Response get responseDistrictLevel => _responseDistrictLevel;
+
+  List<TableData> getTableDataListCountry() {
+    var decodedData = jsonDecode(_responseNational.body);
+    List<TableData> tableDataList = [];
+    for (int i = 0; i < decodedData.length; i++) {
+      String location = decodedData[i]['country'];
+      int confirmed = decodedData[i]['cases'];
+      int recovered = decodedData[i]['recovered'];
+      int deceased = decodedData[i]['deaths'];
+      i++;
+      TableData tableData = TableData(
+          location: location,
+          recovered: recovered,
+          confirmed: confirmed,
+          deceased: deceased);
+      tableDataList.add(tableData);
+    }
+    return tableDataList;
+  }
+
+  List<TableData> getTableDataListState() {
+    var decodedData = jsonDecode(_responseStateLevel1.body);
+    List<TableData> tableDataList = [];
+    for (int i = 0; i < decodedData['statewise'].length; i++) {
+      String location = decodedData['statewise'][i]['state'];
+      int confirmed = int.parse(decodedData['statewise'][i]['confirmed']);
+      int recovered = int.parse(decodedData['statewise'][i]['recovered']);
+      int deceased = int.parse(decodedData['statewise'][i]['deaths']);
+
+      tableDataList.add(TableData(
+          location: location,
+          recovered: recovered,
+          confirmed: confirmed,
+          deceased: deceased));
+    }
+    return tableDataList;
+  }
+
+  List<TableData> getTableDataListDistrict() {
+    List<TableData> tableDataList = [];
+    var decodedData = jsonDecode(_responseDistrictLevel.body);
+    Map<String, dynamic> aa = decodedData['Madhya Pradesh']['districtData'];
+    print(aa == null);
+    aa.forEach((key, value) {
+      String location = key;
+      print(key);
+      var data = value;
+      int confirmed = data['confirmed'];
+      int recovered = data['recovered'];
+      int deceased = data['deceased'];
+
+      print(data['confirmed']);
+      print(data['recovered']);
+      print(data['deceased']);
+      tableDataList.add(
+        TableData(
+            location: location,
+            confirmed: confirmed,
+            recovered: recovered,
+            deceased: deceased),
+      );
+    });
+    return tableDataList;
+  }
 }
