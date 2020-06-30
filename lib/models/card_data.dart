@@ -8,10 +8,9 @@ class CardData {
   CardDataType _cardDataCountry;
   CardDataType _cardDataGlobal;
 
-  CardData.state(Response response, Response response1, String ofState) {
+  CardData.state(Response response, String ofState) {
     String responseBody = response.body;
-    String responseBody1 = response1.body;
-    _setDataToCardDataLocal(responseBody, responseBody1, ofState);
+    _setDataToCardDataLocal(responseBody, ofState);
   }
 
   CardData.country(Response response, String ofCountry) {
@@ -24,41 +23,32 @@ class CardData {
     _setDataToCardDataGlobal(responseBody);
   }
 
-  void _setDataToCardDataLocal(
-      String responseBody, String responseBody1, String state) {
+  void _setDataToCardDataLocal(String responseBody, String state) {
     var decodedData = jsonDecode(responseBody);
-    var decodedData1 = jsonDecode(responseBody1);
 
     String location = 'Madhya Pradesh';
 
     //TODO : make the data readable
 
-    String confirmed = decodedData1['statewise'][8]['confirmed'];
-    String recovered = decodedData1['statewise'][8]['recovered'];
-    String deceased = decodedData1['statewise'][8]['deaths'];
+    String confirmed = decodedData['statewise'][8]['confirmed'];
+    String recovered = decodedData['statewise'][8]['recovered'];
+    String deceased = decodedData['statewise'][8]['deaths'];
 
-    String newConfirmed = decodedData1['statewise'][8]['deltaconfirmed'];
-    String newRecovered = decodedData1['statewise'][8]['deltarecovered'];
-    String newDeceased = decodedData1['statewise'][8]['deltadeaths'];
+    String newConfirmed = decodedData['statewise'][8]['deltaconfirmed'];
+    String newRecovered = decodedData['statewise'][8]['deltarecovered'];
+    String newDeceased = decodedData['statewise'][8]['deltadeaths'];
 
-    double activeRate = decodedData[1]['state_data'][24]['active_rate'];
-    double recoveryRate = decodedData[1]['state_data'][24]['recovered_rate'];
-    double deathRate = decodedData[1]['state_data'][24]['death_rate'];
-
-    String activeCases = decodedData1['statewise'][8]['active'];
+    String activeCases = decodedData['statewise'][8]['active'];
 
     _cardDataLocal = CardDataType(
       confirmed: confirmed,
       recovered: recovered,
       deceased: deceased,
-      deathRate: deathRate.toString(),
-      recoveryRate: recoveryRate.toString(),
       newRecovered: newRecovered.toString(),
       newDeaths: newDeceased,
       newConfirmed: newConfirmed,
       location: location,
       activeCases: activeCases,
-      activeRate: activeRate.toString(),
     );
   }
 

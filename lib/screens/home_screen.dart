@@ -1,11 +1,10 @@
-import 'dart:convert';
 import 'package:covidtracker/models/card_data_type.dart';
 import 'package:covidtracker/models/statistics.dart';
 import 'package:covidtracker/models/table_data.dart';
 import 'package:covidtracker/widgets/data_card.dart';
-import 'package:covidtracker/widgets/state_data_card.dart';
-import 'package:covidtracker/widgets/table_view.dart';
 import 'package:flutter/material.dart';
+import '../constants.dart';
+import '../constants.dart';
 
 class HomeScreen extends StatefulWidget {
   final Statistics stats;
@@ -32,14 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _countryStats = widget.stats.getTableDataListCountry();
     _stateStats = widget.stats.getTableDataListState();
     _districtStats = widget.stats.getTableDataListDistrict();
-    print('district');
-    print(_districtStats);
 
     _widgetList = [
       _glanceView(),
@@ -65,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Column(
       children: <Widget>[
-        StateDataCard(
-          cardDataState: _cardDataState,
+        DataCard(
+          cardData: _cardDataState,
           onPressed: () {
             print('Tap Detected');
             setState(() {
@@ -97,11 +93,47 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _detailedView(List<TableData> tableData) {
-    List<TableData> dd = [];
-    dd.add(tableData[0]);
+    List<Widget> list = _tableViewRowList(tableData);
 
-    return TableView(
-      children: dd,
+    return Card(
+      color: cardColor_dark,
+      child: Column(
+        children: list,
+      ),
     );
+  }
+
+  Widget _tableViewRow(TableData tableData) {
+    //TODO:: design this widget
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Text(
+            tableData.location,
+            style: textStyle_dark,
+          ),
+          Text(
+            tableData.confirmed.toString(),
+            style: textStyle_dark,
+          ),
+          Text(
+            tableData.deceased.toString(),
+            style: textStyle_dark,
+          ),
+          Text(
+            tableData.recovered.toString(),
+            style: textStyle_dark,
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _tableViewRowList(List<TableData> tableData) {
+    List<Widget> list = [];
+    for (int i = 0; i < tableData.length; i++) {
+      list.add(_tableViewRow(tableData[i]));
+    }
+    return list;
   }
 }
