@@ -4,7 +4,6 @@ import 'package:covidtracker/models/table_data.dart';
 import 'package:covidtracker/widgets/data_card.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
-import '../constants.dart';
 
 class HomeScreen extends StatefulWidget {
   final Statistics stats;
@@ -39,16 +38,42 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _widgetList = [
       _glanceView(),
-      _detailedView(_districtStats),
-      _detailedView(_stateStats),
-      _detailedView(_countryStats),
+      _detailedView(_districtStats, 'District'),
+      _detailedView(_stateStats, 'State'),
+      _detailedView(_countryStats, 'Country'),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: _widgetList[_selectedWidget],
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'COVID Tracker',
+          style: textStyle_dark.copyWith(
+            fontWeight: FontWeight.w900,
+            fontSize: 28.0,
+          ),
+        ),
+        leading: _selectedWidget == 0
+            ? button(Icon(Icons.menu), () {})
+            : button(Icon(Icons.arrow_back), () {
+                setState(() {
+                  _selectedWidget = 0;
+                });
+              }),
+      ),
+      body: SingleChildScrollView(
+        child: _widgetList[_selectedWidget],
+      ),
+    );
+  }
+
+  Widget button(Icon icon, Function onPress) {
+    return FlatButton(
+      child: icon,
+      onPressed: onPress,
     );
   }
 
@@ -92,40 +117,111 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _detailedView(List<TableData> tableData) {
+  Widget _detailedView(List<TableData> tableData, String category) {
     List<Widget> list = _tableViewRowList(tableData);
-
-    return Card(
-      color: cardColor_dark,
-      child: Column(
-        children: list,
-      ),
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    category,
+                    style: tabletextStyle_dark.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Confirmed',
+                    style: tabletextStyle_dark.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Recovered',
+                    style: tabletextStyle_dark.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Deceased',
+                    style: tabletextStyle_dark.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Card(
+          color: cardColor_dark,
+          elevation: 10.0,
+          child: Column(
+            children: list,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _tableViewRow(TableData tableData) {
     //TODO:: design this widget
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Text(
-            tableData.location,
-            style: textStyle_dark,
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    tableData.location,
+                    style: tabletextStyle_dark,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    tableData.confirmed.toString(),
+                    style: tabletextStyle_dark,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    tableData.recovered.toString(),
+                    style: tabletextStyle_dark,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    tableData.deceased.toString(),
+                    style: tabletextStyle_dark,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Text(
-            tableData.confirmed.toString(),
-            style: textStyle_dark,
-          ),
-          Text(
-            tableData.deceased.toString(),
-            style: textStyle_dark,
-          ),
-          Text(
-            tableData.recovered.toString(),
-            style: textStyle_dark,
-          ),
-        ],
-      ),
+        ),
+        Divider(
+          height: 20.0,
+        ),
+      ],
     );
   }
 

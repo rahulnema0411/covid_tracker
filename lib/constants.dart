@@ -15,6 +15,12 @@ const TextStyle textStyle_dark = TextStyle(
   color: textColor_dark,
 );
 
+const TextStyle tabletextStyle_dark = TextStyle(
+  fontFamily: 'NunitoSans',
+  color: textColor_dark,
+  fontSize: 12.0,
+);
+
 const TextStyle cardHeading_textStyle = TextStyle(
   fontFamily: 'NunitoSans',
   fontWeight: FontWeight.w800,

@@ -34,16 +34,6 @@ class _ActiveScreenState extends State<ActiveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'COVID Tracker',
-          style: textStyle_dark.copyWith(
-            fontWeight: FontWeight.w900,
-            fontSize: 28.0,
-          ),
-        ),
-      ),
       body: screens[selectedScreen],
       bottomNavigationBar: BottomNavBar(
         selectedItem: selectedScreen,
