@@ -17,7 +17,7 @@ class DataCard extends StatelessWidget {
         onPressed();
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 7.0),
+        padding: EdgeInsets.symmetric(horizontal: 4.0),
         child: Card(
           color: cardColor_dark,
           shape: RoundedRectangleBorder(

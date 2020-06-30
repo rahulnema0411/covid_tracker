@@ -1,4 +1,3 @@
-import 'package:covidtracker/constants.dart';
 import 'package:covidtracker/screens/home_screen_switch.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';

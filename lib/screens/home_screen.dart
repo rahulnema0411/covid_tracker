@@ -36,6 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _stateStats = widget.stats.getTableDataListState();
     _districtStats = widget.stats.getTableDataListDistrict();
 
+    _countryStats.sort((a, b) => b.confirmed.compareTo(a.confirmed));
+    _stateStats.sort((a, b) => b.confirmed.compareTo(a.confirmed));
+    _districtStats.sort((a, b) => b.confirmed.compareTo(a.confirmed));
+
     _widgetList = [
       _glanceView(),
       _detailedView(_districtStats, 'District'),

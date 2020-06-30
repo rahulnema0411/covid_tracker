@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:covidtracker/models/card_data_type.dart';
 import 'package:http/http.dart';
 
@@ -25,20 +24,25 @@ class CardData {
 
   void _setDataToCardDataLocal(String responseBody, String state) {
     var decodedData = jsonDecode(responseBody);
-
-    String location = 'Madhya Pradesh';
+    print('in setting data to card local');
+    print(state);
+    int stateNumber = getStateNumber(responseBody, state);
+    print(stateNumber);
+    String location = decodedData['statewise'][stateNumber]['state'];
 
     //TODO : make the data readable
 
-    String confirmed = decodedData['statewise'][8]['confirmed'];
-    String recovered = decodedData['statewise'][8]['recovered'];
-    String deceased = decodedData['statewise'][8]['deaths'];
+    String confirmed = decodedData['statewise'][stateNumber]['confirmed'];
+    String recovered = decodedData['statewise'][stateNumber]['recovered'];
+    String deceased = decodedData['statewise'][stateNumber]['deaths'];
 
-    String newConfirmed = decodedData['statewise'][8]['deltaconfirmed'];
-    String newRecovered = decodedData['statewise'][8]['deltarecovered'];
-    String newDeceased = decodedData['statewise'][8]['deltadeaths'];
+    String newConfirmed =
+        decodedData['statewise'][stateNumber]['deltaconfirmed'];
+    String newRecovered =
+        decodedData['statewise'][stateNumber]['deltarecovered'];
+    String newDeceased = decodedData['statewise'][stateNumber]['deltadeaths'];
 
-    String activeCases = decodedData['statewise'][8]['active'];
+    String activeCases = decodedData['statewise'][stateNumber]['active'];
 
     _cardDataLocal = CardDataType(
       confirmed: confirmed,
@@ -54,8 +58,6 @@ class CardData {
 
   void _setDataToCardDataCountry(String responseBody, String country) {
     var decodedData = jsonDecode(responseBody);
-
-    int countryPosition = 93;
 
     String location = country;
 
@@ -129,6 +131,17 @@ class CardData {
       sum++;
       if (country == decodedData['Countries'][76]['Country']) {
         break;
+      }
+    }
+    return sum;
+  }
+
+  int getStateNumber(String responseBody, String state) {
+    int sum = 0;
+    var decodedData = jsonDecode(responseBody);
+    for (int i = 0; i < 38; i++) {
+      if (state.compareTo(decodedData['statewise'][i]['state']) == 0) {
+        sum = i;
       }
     }
     return sum;

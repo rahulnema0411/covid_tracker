@@ -57,7 +57,6 @@ class Statistics {
       int confirmed = decodedData[i]['cases'];
       int recovered = decodedData[i]['recovered'];
       int deceased = decodedData[i]['deaths'];
-      i++;
       TableData tableData = TableData(
           location: location,
           recovered: recovered,
