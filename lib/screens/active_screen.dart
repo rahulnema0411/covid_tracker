@@ -1,4 +1,5 @@
 import 'package:covidtracker/screens/home_screen_switch.dart';
+import 'package:covidtracker/screens/news_screen_switch.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +19,7 @@ class _ActiveScreenState extends State<ActiveScreen> {
 
     screens = [
       HomeScreenSwitch(),
-      Center(
-        child: Text('OK'),
-      ),
+      NewsScreenSwitch(),
       Center(
         child: Text('OK'),
       ),

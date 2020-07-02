@@ -53,16 +53,27 @@ const TextStyle kTextViewData = TextStyle(
 
 class Essentials {
   static String toReadableInt(String number) {
-    if (number.length <= 3) {
+    if (number == null) {
+      return '';
+    } else if (number.length <= 3) {
       return number;
     } else {
-      String readableNum =
-          '${number.substring(number.length - 3, number.length)}';
-      for (int i = number.length - 4; i >= 0; i = i - 2) {
-        readableNum = ',$readableNum';
-        readableNum = '${number.substring(i, i + 2)}$readableNum';
+      String formattedString = '';
+      if (number.length % 2 == 0) {
+        formattedString = '${number[0]},';
+        for (int i = 1; i < number.length - 4; i = i + 2) {
+          formattedString = '$formattedString${number[i]}${number[i + 1]},';
+        }
+      } else {
+        for (int i = 0; i < number.length - 4; i = i + 2) {
+          formattedString = '$formattedString${number[i]}${number[i + 1]},';
+        }
       }
-      return readableNum;
+      formattedString =
+          '$formattedString${number.substring(number.length - 3, number.length)}';
+      return formattedString;
     }
   }
 }
+
+const String kNewsAPIKey = '3a30d0b107184294a6b3a81c06ee8a3d';

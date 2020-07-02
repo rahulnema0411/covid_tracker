@@ -1,4 +1,6 @@
 import 'dart:convert';
+
+import 'package:covidtracker/constants.dart';
 import 'package:covidtracker/models/card_data_type.dart';
 import 'package:http/http.dart';
 
@@ -32,17 +34,21 @@ class CardData {
 
     //TODO : make the data readable
 
-    String confirmed = decodedData['statewise'][stateNumber]['confirmed'];
-    String recovered = decodedData['statewise'][stateNumber]['recovered'];
-    String deceased = decodedData['statewise'][stateNumber]['deaths'];
+    String confirmed =
+        Essentials.toReadableInt(decodedData['statewise'][8]['confirmed']);
+    String recovered =
+        Essentials.toReadableInt(decodedData['statewise'][8]['recovered']);
+    String deceased =
+        Essentials.toReadableInt(decodedData['statewise'][8]['deaths']);
 
     String newConfirmed =
-        decodedData['statewise'][stateNumber]['deltaconfirmed'];
+        Essentials.toReadableInt(decodedData['statewise'][8]['deltaconfirmed']);
     String newRecovered =
-        decodedData['statewise'][stateNumber]['deltarecovered'];
-    String newDeceased = decodedData['statewise'][stateNumber]['deltadeaths'];
+        Essentials.toReadableInt(decodedData['statewise'][8]['deltarecovered']);
+    String newDeceased =
+        Essentials.toReadableInt(decodedData['statewise'][8]['deltadeaths']);
 
-    String activeCases = decodedData['statewise'][stateNumber]['active'];
+    String activeCases = decodedData['statewise'][8]['active'];
 
     _cardDataLocal = CardDataType(
       confirmed: confirmed,
@@ -58,6 +64,8 @@ class CardData {
 
   void _setDataToCardDataCountry(String responseBody, String country) {
     var decodedData = jsonDecode(responseBody);
+
+    int countryPosition = 93;
 
     String location = country;
 
@@ -76,17 +84,17 @@ class CardData {
     int activeCases = decodedData[93]['active'];
 
     _cardDataCountry = CardDataType(
-      confirmed: confirmed.toString(),
-      recovered: recovered.toString(),
-      deceased: deceased.toString(),
-      deathRate: deathRate.toString(),
-      recoveryRate: recoveryRate.toString(),
-      newRecovered: newRecovered.toString(),
-      newDeaths: newDeceased.toString(),
-      newConfirmed: newConfirmed.toString(),
+      confirmed: Essentials.toReadableInt(confirmed.toString()),
+      recovered: Essentials.toReadableInt(recovered.toString()),
+      deceased: Essentials.toReadableInt(deceased.toString()),
+      deathRate: Essentials.toReadableInt(deathRate.toString()),
+      recoveryRate: Essentials.toReadableInt(recoveryRate.toString()),
+      newRecovered: Essentials.toReadableInt(newRecovered.toString()),
+      newDeaths: Essentials.toReadableInt(newDeceased.toString()),
+      newConfirmed: Essentials.toReadableInt(newConfirmed.toString()),
       location: location,
-      activeCases: activeCases.toString(),
-      activeRate: activeRate.toString(),
+      activeCases: Essentials.toReadableInt(activeCases.toString()),
+      activeRate: Essentials.toReadableInt(activeRate.toString()),
     );
   }
 
@@ -110,14 +118,14 @@ class CardData {
     int activeCases = decodedData['active'];
 
     _cardDataGlobal = CardDataType(
-      confirmed: confirmed.toString(),
-      recovered: recovered.toString(),
-      deceased: deceased.toString(),
-      deathRate: deathRate.toString(),
-      recoveryRate: recoveryRate.toString(),
-      newRecovered: newRecovered.toString(),
-      newDeaths: newDeceased.toString(),
-      newConfirmed: newConfirmed.toString(),
+      confirmed: Essentials.toReadableInt(confirmed.toString()),
+      recovered: Essentials.toReadableInt(recovered.toString()),
+      deceased: Essentials.toReadableInt(deceased.toString()),
+      deathRate: Essentials.toReadableInt(deathRate.toString()),
+      recoveryRate: Essentials.toReadableInt(recoveryRate.toString()),
+      newRecovered: Essentials.toReadableInt(newRecovered.toString()),
+      newDeaths: Essentials.toReadableInt(newDeceased.toString()),
+      newConfirmed: Essentials.toReadableInt(newConfirmed.toString()),
       location: location,
       activeCases: activeCases.toString(),
       activeRate: activeRate.toString(),

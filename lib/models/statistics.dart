@@ -1,7 +1,9 @@
 import 'dart:convert';
+
 import 'package:covidtracker/models/card_data_type.dart';
 import 'package:covidtracker/models/table_data.dart';
 import 'package:http/http.dart' as http;
+
 import 'card_data.dart';
 
 class Statistics {
