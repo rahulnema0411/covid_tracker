@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         leading: _selectedWidget == 0
-            ? button(Icon(Icons.menu), () {})
+            ? Container()
             : button(Icon(Icons.arrow_back), () {
                 setState(() {
                   _selectedWidget = 0;
@@ -170,11 +170,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        Card(
-          color: cardColor_dark,
-          elevation: 10.0,
-          child: Column(
-            children: list,
+        Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            color: cardColor_dark,
+            elevation: 10.0,
+            child: Column(
+              children: list,
+            ),
           ),
         ),
       ],
@@ -200,21 +206,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    tableData.confirmed.toString(),
+                    Essentials.toReadableInt(tableData.confirmed.toString()),
                     style: tabletextStyle_dark,
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: Text(
-                    tableData.recovered.toString(),
+                    Essentials.toReadableInt(tableData.recovered.toString()),
                     style: tabletextStyle_dark,
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: Text(
-                    tableData.deceased.toString(),
+                    Essentials.toReadableInt(tableData.deceased.toString()),
                     style: tabletextStyle_dark,
                   ),
                 ),

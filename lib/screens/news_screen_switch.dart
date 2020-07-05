@@ -28,7 +28,6 @@ class _NewsScreenSwitchState extends State<NewsScreenSwitch> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (context.read<AppData>().news == null) {
       isLoading = true;

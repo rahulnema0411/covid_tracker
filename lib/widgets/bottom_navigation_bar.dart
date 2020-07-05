@@ -51,15 +51,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           BottomNavBarItem(
             isSelected: widget.selectedItem == 2,
-            icon: FontAwesomeIcons.globeAmericas,
-            index: 2,
-            onTap: widget.onTap,
-            label: 'World',
-          ),
-          BottomNavBarItem(
-            isSelected: widget.selectedItem == 3,
             icon: FontAwesomeIcons.heartbeat,
-            index: 3,
+            index: 2,
             onTap: widget.onTap,
             label: 'Self-Assessment',
           ),

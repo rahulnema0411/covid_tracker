@@ -48,7 +48,8 @@ class CardData {
     String newDeceased =
         Essentials.toReadableInt(decodedData['statewise'][8]['deltadeaths']);
 
-    String activeCases = decodedData['statewise'][8]['active'];
+    String activeCases =
+        Essentials.toReadableInt(decodedData['statewise'][8]['active']);
 
     _cardDataLocal = CardDataType(
       confirmed: confirmed,
@@ -127,8 +128,8 @@ class CardData {
       newDeaths: Essentials.toReadableInt(newDeceased.toString()),
       newConfirmed: Essentials.toReadableInt(newConfirmed.toString()),
       location: location,
-      activeCases: activeCases.toString(),
-      activeRate: activeRate.toString(),
+      activeCases: Essentials.toReadableInt(activeCases.toString()),
+      activeRate: Essentials.toReadableInt(activeRate.toString()),
     );
   }
 

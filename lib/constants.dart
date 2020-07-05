@@ -22,19 +22,21 @@ const TextStyle tabletextStyle_dark = TextStyle(
 );
 
 const TextStyle cardHeading_textStyle = TextStyle(
-  fontFamily: 'NunitoSans',
-  fontWeight: FontWeight.w800,
-  fontSize: 26.0,
-);
+    fontFamily: 'NunitoSans',
+    fontWeight: FontWeight.w800,
+    fontSize: 26.0,
+    color: textColor_dark);
 
 const TextStyle cardsubHeading_textStyle = TextStyle(
   fontFamily: 'NunitoSans',
   fontWeight: FontWeight.w700,
+  color: textColor_dark,
   fontSize: 20.0,
 );
 
 const TextStyle cardData_textStyle = TextStyle(
   fontFamily: 'NunitoSans',
+  color: textColor_dark,
 );
 
 const TextStyle kstateCard_textStyle = TextStyle(

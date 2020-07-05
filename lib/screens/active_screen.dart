@@ -1,3 +1,4 @@
+import 'package:covidtracker/screens/health_check_screen.dart';
 import 'package:covidtracker/screens/home_screen_switch.dart';
 import 'package:covidtracker/screens/news_screen_switch.dart';
 import 'package:covidtracker/widgets/bottom_navigation_bar.dart';
@@ -20,12 +21,7 @@ class _ActiveScreenState extends State<ActiveScreen> {
     screens = [
       HomeScreenSwitch(),
       NewsScreenSwitch(),
-      Center(
-        child: Text('OK'),
-      ),
-      Center(
-        child: Text('OK'),
-      ),
+      HealthCheckScreen(),
     ];
   }
 

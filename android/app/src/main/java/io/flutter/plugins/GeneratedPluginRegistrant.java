@@ -16,5 +16,6 @@ public final class GeneratedPluginRegistrant {
     flutterEngine.getPlugins().add(new com.baseflow.geolocator.GeolocatorPlugin());
     flutterEngine.getPlugins().add(new com.baseflow.googleapiavailability.GoogleApiAvailabilityPlugin());
     flutterEngine.getPlugins().add(new com.baseflow.location_permissions.LocationPermissionsPlugin());
+    flutterEngine.getPlugins().add(new io.flutter.plugins.webviewflutter.WebViewFlutterPlugin());
   }
 }
