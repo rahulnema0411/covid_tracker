@@ -1,3 +1,4 @@
+import 'package:covidtracker/widgets/news_web_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:covidtracker/constants.dart';
@@ -9,8 +10,26 @@ class HealthCheckScreen extends StatefulWidget {
 }
 
 class _HealthCheckScreenState extends State<HealthCheckScreen> {
+  List<Widget> _widgetList;
+  int _selectedWidget = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _selectedWidget = 0;
+    _widgetList = [
+      healthScreen(),
+      NewsWebView('url', onButtonPress),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    return _widgetList[_selectedWidget];
+  }
+
+  Widget healthScreen() {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,15 +41,18 @@ class _HealthCheckScreenState extends State<HealthCheckScreen> {
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            symptomsSection(),
-            reusableCard('Stay home to stop Corona Virus',
-                'images/facial_mask_coronavirus.png'),
-            reusableCard(
-                'Boost your immunity', 'images/facial_mask_coronavirus.png'),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              symptomsSection(),
+              reusableCard(
+                  'Protect yourself from COVID-19',
+                  'images/facial_mask_coronavirus.png',
+                  'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public'),
+              reusableCardTwo(),
+            ],
+          ),
         ),
       ),
     );
@@ -82,20 +104,14 @@ class _HealthCheckScreenState extends State<HealthCheckScreen> {
       padding: const EdgeInsets.all(2.0),
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Symptoms',
-                  style: cardHeading_textStyle,
-                ),
-                Text(
-                  'View all',
-                  style: cardData_textStyle,
-                ),
-              ],
+          Container(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Symptoms',
+                style: cardHeading_textStyle,
+              ),
             ),
           ),
           SingleChildScrollView(
@@ -120,7 +136,7 @@ class _HealthCheckScreenState extends State<HealthCheckScreen> {
     );
   }
 
-  Widget reusableCard(String title, String url) {
+  Widget reusableCard(String title, String url, String webUrl) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Card(
@@ -149,11 +165,16 @@ class _HealthCheckScreenState extends State<HealthCheckScreen> {
                     child: FlatButton(
                       color: backGroundColor_dark,
                       padding: EdgeInsets.all(0.0),
-                      child: Text(
-                        'Know More',
-                        style: cardData_textStyle,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 6.0),
+                        child: Text(
+                          'Visit WHO for more Info',
+                          style: cardData_textStyle,
+                        ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        onButtonPress(webUrl);
+                      },
                     ),
                   ),
                 ],
@@ -170,6 +191,126 @@ class _HealthCheckScreenState extends State<HealthCheckScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget reusableCardTwo() {
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        color: cardColor_dark,
+        elevation: 10.0,
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+              child: Text(
+                'Stay Healthy at Home',
+                style: cardsubHeading_textStyle,
+              ),
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
+              child: Text(
+                'See what WHO has to say...',
+                style: cardData_textStyle,
+              ),
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: <Widget>[
+                  customFlatButton(
+                    'Stay Physically Active',
+                    'images/dumbbell.png',
+                    'https://www.who.int/news-room/campaigns/connecting-the-world-to-combat-coronavirus/healthyathome/healthyathome---physical-activity',
+                  ),
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                  customFlatButton(
+                    'Maintain Healthy Diet',
+                    'images/diet.png',
+                    'https://www.who.int/news-room/campaigns/connecting-the-world-to-combat-coronavirus/healthyathome/healthyathome---healthy-diet',
+                  ),
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                  customFlatButton(
+                    'Healthy Parenting',
+                    'images/family.png',
+                    'https://www.who.int/news-room/campaigns/connecting-the-world-to-combat-coronavirus/healthyathome/healthyathome---healthy-parenting',
+                  ),
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                  customFlatButton(
+                    'Mental Health',
+                    'images/brain.png',
+                    'https://www.who.int/news-room/campaigns/connecting-the-world-to-combat-coronavirus/healthyathome/healthyathome---mental-health',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onButtonPress(String goToUrl) {
+    NewsWebView newsWebView = NewsWebView(goToUrl, showHealthScreen);
+    _widgetList[1] = newsWebView;
+
+    setState(() {
+      _selectedWidget = 1;
+    });
+  }
+
+  void showHealthScreen() {
+    setState(() {
+      _selectedWidget = 0;
+    });
+  }
+
+  Widget customFlatButton(String txt, String urlToImage, String urlToWeb) {
+    return FlatButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      color: backGroundColor_dark,
+      padding: EdgeInsets.symmetric(horizontal: 4.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5.0),
+              child: Image(
+                height: 30.0,
+                width: 30.0,
+                image: AssetImage(urlToImage),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                txt,
+                style: cardsubHeading_textStyle,
+              ),
+            ),
+          ],
+        ),
+      ),
+      onPressed: () {
+        onButtonPress(urlToWeb);
+      },
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:covidtracker/models/news.dart';
 import 'package:covidtracker/constants.dart';
+import 'package:covidtracker/widgets/news_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:covidtracker/models/news_list.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class NewsScreen extends StatefulWidget {
   final List<News> news;
@@ -26,7 +26,7 @@ class _NewsScreenState extends State<NewsScreen> {
     _newsList = NewsList(widget.news);
     _widgetList = [
       newsGlanceView(),
-      newsWebView('url'),
+      NewsWebView('url', onClosePress),
     ];
   }
 
@@ -60,32 +60,15 @@ class _NewsScreenState extends State<NewsScreen> {
   void onCardPress(String url) {
     setState(() {
       print(url);
-      _widgetList[1] = newsWebView(url);
+      _widgetList[1] = NewsWebView(url, onClosePress);
       _selectedWidget = 1;
       print('Tap Detected');
     });
   }
 
-  Widget newsWebView(String url) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          url,
-          style: cardData_textStyle,
-        ),
-        leading: FlatButton(
-          onPressed: () {
-            setState(() {
-              _selectedWidget = 0;
-            });
-          },
-          child: Icon(Icons.close),
-        ),
-      ),
-      body: WebView(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: url,
-      ),
-    );
+  void onClosePress() {
+    setState(() {
+      _selectedWidget = 0;
+    });
   }
 }

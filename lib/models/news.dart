@@ -4,12 +4,14 @@ class News {
   String description;
   String source;
   String linkToBrowser;
+  String publishedAt;
   News(
       {this.title,
       this.description,
       this.imageURL,
       this.source,
-      this.linkToBrowser});
+      this.linkToBrowser,
+      this.publishedAt});
 }
 
 //Future<void> getNews() async{

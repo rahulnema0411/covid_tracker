@@ -50,17 +50,34 @@ class NewsCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    _news.source,
-                    style: cardData_textStyle.copyWith(
-                      color: Colors.grey,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        _news.source,
+                        style: cardData_textStyle.copyWith(
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        _news.publishedAt.substring(0, 10),
+                        style: cardData_textStyle.copyWith(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
