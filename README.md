@@ -1,6 +1,6 @@
 # covidtracker
 
-A new Flutter application.
+A Flutter application that pulls data from reliable sources about covid-19 statistics and news
 
 ## Getting Started
 
